@@ -13,6 +13,7 @@ canvas {
     default-points: false;
 }
 
+
 /* highlight boundary */
 	relation[type=boundary][boundary=administrative][admin_level=4],
 way {
@@ -38,11 +39,29 @@ way[boundary=administrative][admin_level=8]          {
     z-index: 4;
 }
 
+relation[type=boundary][boundary=administrative][admin_level=4],
+way[boundary=administrative][status=working]
 
+{
+    width: 5;
+    color: orange;
+    opacity: 1;
+    z-index: -5;
+}
+
+relation[type=boundary][boundary=administrative][admin_level=4],
+way[boundary=administrative][status=done]
+
+{
+    width: 5;
+    color: orange;
+    opacity: 0;
+    z-index: -5;
+}
 
 /* Highlight the ways that we had modified, so we know what we have done until now, what borders we had touched */
-
-way:modified::modified_layer,
+/*relation[type=boundary][boundary=administrative][admin_level=4],
+way[boundary=administrative]:modified::modified_layer,
 node:modified < way::modified_layer 
 {
     width: 20;
@@ -60,7 +79,7 @@ node:modified::modified_layer
     symbol-fill-opacity: 0.3;
     z-index: -5;
 }
-
+*/
 
 /* fixme why it does not work to show admin_level=6 and admin_level=4 on the same layer ? */
 /*area[admin_level=4]::closed {
@@ -153,6 +172,7 @@ way >[index=-1] node|z-7 {  /* matches the last node of a way  */
    symbol-size: 8;
  
 }
+
 
 
 way!:closed >[index=1] node!:connection,
