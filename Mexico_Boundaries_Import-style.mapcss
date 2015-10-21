@@ -9,7 +9,9 @@ meta
         watch-modified: true;
 }
 
-
+canvas {
+    default-points: false;
+}
 
 /* highlight boundary */
 	relation[type=boundary][boundary=administrative][admin_level=4],
@@ -47,18 +49,6 @@ node:modified < way::modified_layer
     color: yellow;
     opacity: 0.3;
     z-index: -5;
-}
-way[boundary=protected_area]::core_boundary,
-way[boundary=administrative]::core_boundary,
-way[boundary=postal_code]::core_boundary,
-way[boundary=political]::core_boundary,
-way[boundary=maritime]::core_boundary,
-way[boundary=national_park]::core_boundary {
-    z-index: 2;
-    modifier: false;
-    width: 1;
-    color: boundary#FF6600;
-   /* dashes: 9,9;*/
 }
 
 
@@ -138,15 +128,7 @@ node:connection|z14-{
     z-index: 10;
 }
 
-node|z-13{
-    symbol-shape: square;
-    symbol-size: 1; 
- 
-    /*    symbol-fill-opacity: 0.9;*/
-    symbol-stroke-color: white;
-  symbol-stroke-opacity: 0.9;
-/*   symbol-stroke-opacity: 0.9;*/
-}
+
 
 /* The last node of the way is square and grey, 
 so we can quickly select the end of a way and Unglue Ways in JOSM using the Keyboard letter "G" */
@@ -178,3 +160,4 @@ way!:closed >[index=-1] node!:connection {   matches all single way end nodes
    symbol-stroke-color: blue;
    symbol-size: 10;
 }
+
