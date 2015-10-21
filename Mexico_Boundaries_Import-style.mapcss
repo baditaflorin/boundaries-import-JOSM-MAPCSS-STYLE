@@ -1,0 +1,171 @@
+
+
+meta 
+{
+	title: "Coloured Suburb";
+        version: "0.1";
+	description: "Coloring boundaries";
+	author: "Badita Florin";
+        link: "http://josm.openstreetmap.de/wiki/Styles/Coloured_Suburb";
+        watch-modified: true;
+}
+
+
+
+/* highlight boundary */
+	relation[type=boundary][boundary=administrative][admin_level=4],
+way {
+	width: 6;
+	color: green; 
+	z-index: 5;
+    opacity: 0.4;
+	/*dashes: 20; */
+	} 
+relation[type=boundary][boundary=administrative],
+way[boundary=administrative][admin_level=6]	 {
+	width: 2;
+	color: skyblue; 
+	z-index: -1;
+	/*dashes: 10; */
+	} 
+way[boundary=administrative][admin_level=8]          {
+    z-index: -1;
+    color: purple;
+    width: 2;
+    opacity: 0.8;
+    dashes: 24,4;
+    z-index: 4;
+}
+
+
+
+/* Highlight the ways that we had modified, so we know what we have done until now, what borders we had touched */
+
+way:modified::modified_layer,
+node:modified < way::modified_layer 
+{
+    width: 20;
+    color: yellow;
+    opacity: 0.3;
+    z-index: -5;
+}
+way[boundary=protected_area]::core_boundary,
+way[boundary=administrative]::core_boundary,
+way[boundary=postal_code]::core_boundary,
+way[boundary=political]::core_boundary,
+way[boundary=maritime]::core_boundary,
+way[boundary=national_park]::core_boundary {
+    z-index: 2;
+    modifier: false;
+    width: 1;
+    color: boundary#FF6600;
+   /* dashes: 9,9;*/
+}
+
+
+node:modified::modified_layer 
+{
+    symbol-shape: circle;
+    symbol-size: 30;
+    symbol-fill-color: lime;
+    symbol-fill-opacity: 0.3;
+    z-index: -5;
+}
+
+
+
+area[admin_level=6] {
+    z-index: 1;
+    modifier: true;
+    fill-color: red;
+    fill-opacity: 0.7;
+}
+
+area[admin_level=6]:closed {
+    z-index: 1;
+    modifier: true;
+    fill-color: white;
+    fill-opacity: 0.2;
+}
+
+/*Zoom Level */
+
+/* Zoom in */ 
+
+	relation[type=boundary][boundary=administrative],
+node|z14-[boundary=administrative][admin_level=4] {
+	symbol-fill-color: white;
+	symbol-shape: circle; 
+	symbol-size: 20;
+	z-index: -1;
+	
+}
+
+
+node|z14-{
+    symbol-shape: circle;
+    symbol-size: 10;
+    symbol-fill-color:yellow;
+    symbol-fill-opacity: 0.9; 
+   symbol-stroke-color: black; 
+/*   symbol-stroke-opacity: 0.9;*/
+}
+
+node:connection|z14-{
+    symbol-shape: square;
+    symbol-size: 35;
+/*    symbol-stroke-color: red;
+    symbol-stroke-size: 20;*/
+    z-index: -1;
+
+}
+
+/* zoom out */
+ node:connection|z-13{
+    symbol-shape: square;
+    symbol-size: 20;
+    symbol-stroke-color: red;
+    symbol-stroke-size: 20;
+    z-index: 10;
+}
+
+node|z-13{
+    symbol-shape: square;
+    symbol-size: 1; 
+ 
+    /*    symbol-fill-opacity: 0.9;*/
+    symbol-stroke-color: white;
+  symbol-stroke-opacity: 0.9;
+/*   symbol-stroke-opacity: 0.9;*/
+}
+
+/* The last node of the way is square and grey, 
+so we can quickly select the end of a way and Unglue Ways in JOSM using the Keyboard letter "G" */
+
+way >[index=-1] node {  /* matches the last node of a way  */ 
+   symbol-fill-color: grey;
+    symbol-shape: square;
+    symbol-stroke-color: white;
+   symbol-size: 15;
+ 
+}
+
+
+/* Make the square smaller when you zoom out
+The last node of the way is square and grey, 
+so we can quickly select the end of a way and Unglue Ways in JOSM using the Keyboard letter "G" */
+
+way >[index=-1] node|z-7 {  /* matches the last node of a way  */ 
+   symbol-fill-color: grey;
+    symbol-shape: square;
+    symbol-stroke-color: white;
+   symbol-size: 8;
+ 
+}
+
+
+way!:closed >[index=1] node!:connection,
+way!:closed >[index=-1] node!:connection {   matches all single way end nodes  
+   symbol-stroke-color: blue;
+   symbol-size: 10;
+}
