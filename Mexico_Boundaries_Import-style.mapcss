@@ -2,11 +2,10 @@
 
 meta 
 {
-	title: "Coloured Suburb";
+	title: "Mexico Boundaries Import JOSM";
         version: "0.1";
-	description: "Coloring boundaries";
+	description: "Mexico Boundaries Import JOSM";
 	author: "Badita Florin";
-        link: "http://josm.openstreetmap.de/wiki/Styles/Coloured_Suburb";
         watch-modified: true;
 }
 
