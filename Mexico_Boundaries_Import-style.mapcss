@@ -2,10 +2,10 @@
 
 meta 
 {
-	title: "Mexico Boundaries Import JOSM";
+	title: "Mexico Boundaries import style";
         version: "0.1";
-	description: "Mexico Boundaries Import JOSM";
-	author: "Badita Florin";
+	description: "Mexico Boundaries import style";
+	author: "Badita Florin ";
         watch-modified: true;
 }
 
@@ -72,21 +72,31 @@ node:modified::modified_layer
 }
 
 
-
-area[admin_level=6] {
+/* fixme why it does not work to show admin_level=6 and admin_level=4 on the same layer ? */
+/*area[admin_level=4]::closed {
     z-index: 1;
     modifier: true;
     fill-color: red;
-    fill-opacity: 0.7;
+    fill-opacity: 0.1;
 }
+*/
 
-area[admin_level=6]:closed {
-    z-index: 1;
+
+
+area[admin_level=6] {
+    z-index: -1;
+    modifier: false;
+    fill-color: white;
+    fill-opacity: 0;
+    font-size: 12; 
+}
+area[admin_level=4]::closed {
+    z-index: 5;
     modifier: true;
     fill-color: white;
-    fill-opacity: 0.2;
+    fill-opacity: 0.1;
+    font-size: 12; 
 }
-
 /*Zoom Level */
 
 /* Zoom in */ 
